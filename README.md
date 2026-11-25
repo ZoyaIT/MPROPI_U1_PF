@@ -1,21 +1,21 @@
-# Barcelona Traffic Accidents Dashboard
+# Tauler d'accidents de trànsit a Barcelona
 
-A  project built using Flask, Jinja, Pandas, and Matplotlib.
+Un projecte desenvolupat amb Flask, Jinja, Pandas i Matplotlib.
 
-## 1. Dataset
+## 1. Conjunt de dades
 
-Download a CSV file of accidents handled by the Guàrdia Urbana from the
-Barcelona City Council Open Data Portal:
+Descarregueu un fitxer CSV amb els accidents gestionats per la Guàrdia Urbana des del
+Portal de Dades Obertes de l'Ajuntament de Barcelona:
 
 https://opendata-ajuntament.barcelona.cat/data/es/dataset/accidents-gu-bcn
 
-Choose a yearly CSV file and save it as:
+Trieu un fitxer CSV anual i deseu-lo com a:
 
 `data/accidents.csv`
 
-## 2. Install
+## 2. Instal·lació
 
-Open Terminal in this project folder and run:
+Obriu el Terminal a la carpeta d'aquest projecte i executeu:
 
 ```bash
 python3 -m venv venv
@@ -23,25 +23,25 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## 3. Run
+## 3. Executar
 
 ```bash
 python app.py
 ```
 
-Open this address in your browser:
+Obre aquesta adreça al teu navegador:
 
 http://127.0.0.1:5000
 
-## 4. Project structure
+## 4. Estructura del projecte
 
-- `app.py`: Flask routes and pages.
-- `data.py`: reads, filters and sorts CSV data.
-- `charts.py`: creates the graph with Matplotlib.
-- `data/accidents.csv`: downloaded public dataset.
-- `templates/index.html`: Jinja page.
-- `static/css/style.css`: page styles.
-- `static/img/`: generated chart.
+- `app.py`: rutes i pàgines de Flask.
+- `data.py`: llegeix, filtra i ordena dades en format CSV.
+- `charts.py`: crea el gràfic amb Matplotlib.
+- `data/accidents.csv`: conjunt de dades públic descarregat.
+- `templates/index.html`: pàgina Jinja.
+- `static/css/style.css`: estils de la pàgina.
+- `static/img/`: gràfic generat.
 
-The dashboard searches across all columns, filters by a selected column,
-sorts records and displays up to 100 rows at a time.
+El tauler de control cerca en totes les columnes, filtra per una columna seleccionada,
+ordena els registres i mostra fins a 100 files alhora.
