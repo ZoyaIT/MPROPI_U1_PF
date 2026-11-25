@@ -1,0 +1,377 @@
+:root {
+    --paper: #f3f6f8;
+    --ink: #172b3a;
+    --white: #ffffff;
+    --line: #e1e8ed;
+    --muted: #637583;
+    --blue: #245b78;
+    --blue-light: #e8f1f6;
+}
+/* =========================================
+   1. GENERAL STYLES
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   2. HEADER / HERO SECTION
+========================================= */
+
+.hero {
+    padding: 54px 7%;
+    color: white;
+    background: linear-gradient(120deg, #173d55, #367d91);
+}
+
+.hero h1 {
+    margin: 5px 0 8px;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.hero p {
+    max-width: 720px;
+    margin-bottom: 0;
+    color: #e5f0f4;
+}
+
+
+/* =========================================
+   3. TEXT STYLES
+========================================= */
+
+.eyebrow {
+    margin: 0 0 7px;
+    color: #4290c3;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.hero .eyebrow {
+    color: #eef2f3;
+}
+
+h2 {
+    margin: 0;
+    font-size: 1.45rem;
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.intro {
+    margin-top: 8px;
+    color: var(--muted);
+}
+
+
+/* =========================================
+   4. MAIN CONTAINER
+========================================= */
+
+.container {
+    width: min(1180px, 92%);
+    margin: 28px auto 55px;
+}
+
+
+/* =========================================
+   5. STATISTICS CARDS
+========================================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.stat-card,
+.panel {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(24, 51, 67, 0.04);
+}
+
+.stat-card {
+    padding: 19px 22px;
+}
+
+.stat-card span,
+.insight-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+.stat-card strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 1.8rem;
+}
+
+
+/* =========================================
+   6. CONTENT PANELS
+========================================= */
+
+.panel {
+    padding: 25px;
+    margin-top: 18px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================
+   7. SEARCH AND FILTER FORM
+========================================= */
+
+.filters {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #2d66a0;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+input,
+select {
+    width: 100%;
+    min-width: 0;
+    padding: 11px 10px;
+    border: 1px solid #ccd8df;
+    border-radius: 8px;
+    background: white;
+    color: var(--ink);
+    font: inherit;
+}
+
+
+/* =========================================
+   8. BUTTONS AND LINKS
+========================================= */
+
+button {
+    padding: 11px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--blue);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #17445f;
+}
+
+.reset {
+    color: var(--blue);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+/* =========================================
+   9. EDUCATIONAL INSIGHTS
+========================================= */
+
+.insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+}
+
+.insight-card {
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #e4eaed;
+}
+
+.insight-card strong {
+    display: block;
+    margin: 7px 0;
+    color: var(--blue);
+    font-size: 1.2rem;
+    overflow-wrap: anywhere;
+}
+
+.insight-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+
+/* =========================================
+   10. PIE CHART
+========================================= */
+
+.chart {
+    display: block;
+    width: min(100%, 760px);
+    height: auto;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   11. DATA TABLE
+========================================= */
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+th,
+td {
+    padding: 12px 13px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    white-space: nowrap;
+}
+
+th {
+    background: var(--blue-light);
+    color: #24495e;
+}
+
+tbody tr:hover {
+    background: #297b97;
+}
+
+.result-count {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+
+/* =========================================
+   12. EMPTY RESULTS MESSAGE
+========================================= */
+
+.empty {
+    padding: 18px;
+    border-radius: 8px;
+    background: #8ca3af;
+    color: var(--muted);
+}
+
+
+/* =========================================
+   13. DATA SOURCE
+========================================= */
+
+.source a {
+    color: var(--blue);
+    font-weight: 700;
+}
+
+
+/* =========================================
+   14. FOOTER AND CODE
+========================================= */
+
+footer {
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+code {
+    padding: 2px 5px;
+    border-radius: 4px;
+    background: #7da3c0;
+}
+
+
+/* =========================================
+   15. RESPONSIVE DESIGN - TABLETS
+========================================= */
+
+@media (max-width: 950px) {
+
+    .filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .filters .wide {
+        grid-column: 1 / -1;
+    }
+
+    .filters button {
+        align-self: end;
+    }
+}
+
+
+/* =========================================
+   16. RESPONSIVE DESIGN - MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .hero {
+        padding: 38px 5%;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        padding: 18px;
+    }
+
+    .filters {
+        grid-template-columns: 1fr;
+    }
+
+    .filters .wide {
+        grid-column: auto;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+

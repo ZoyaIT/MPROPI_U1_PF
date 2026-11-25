@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tauler d'accidents de trànsit a Barcelona</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="hero">
+    <p class="eyebrow">OPEN DATA · BARCELONA</p>
+    <h1>Tauler d'accidents de trànsit</h1>
+    <p>Explora els registres d'accidents, compara categories i descobreix patrons a Barcelona.</p>
+</header>
+
+<main class="container">
+    <section class="stats">
+        <article class="stat-card"><span>Total de registres</span><strong>{{ "{:,}".format(total) }}</strong></article>
+        <article class="stat-card"><span>Registres coincidents</span><strong>{{ "{:,}".format(filtered_total) }}</strong></article>
+        <article class="stat-card"><span>Mostrat en una taula</span><strong>{{ rows|length }}</strong></article>
+    </section>
+
+    <section class="panel">
+        <div class="section-heading">
+            <div><p class="eyebrow">EXPLORA LES DADES</p><h2>Cerca i filtres</h2></div>
+            <a class="reset" href="{{ url_for('index') }}">Esborra-ho tot</a>
+        </div>
+        <form method="get" action="{{ url_for('index') }}" class="filters">
+            <label class="wide">Cerca a totes les columnes
+                <input type="search" name="search" value="{{ search }}" placeholder="Escriu un districte, una categoria, una data...">
+            </label>
+            <label>Filtra la columna
+                <select name="filter_column" onchange="this.form.submit()">
+                    <option value="">Tria una columna</option>
+                    {% for column in filter_columns %}
+                    <option value="{{ column }}" {% if filter_column == column %}selected{% endif %}>{{ column }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>Valor del filtre
+                <select name="filter_value">
+                    <option value="">Tots els valors</option>
+                    {% for option in filter_options %}
+                    <option value="{{ option }}" {% if filter_value == option %}selected{% endif %}>{{ option }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>Ordena per
+                <select name="sort_column">
+                    <option value="">Ordre original</option>
+                    {% for column in columns %}
+                    <option value="{{ column }}" {% if sort_column == column %}selected{% endif %}>{{ column }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>Ordre
+                <select name="sort_order">
+                    <option value="asc" {% if sort_order == "asc" %}selected{% endif %}>Ascendent</option>
+                    <option value="desc" {% if sort_order == "desc" %}selected{% endif %}>Descendent</option>
+                </select>
+            </label>
+            <label>Registres per pàgina
+                <select name="per_page">
+                    {% for amount in [10, 25, 50, 100] %}
+                    <option value="{{ amount }}" {% if per_page == amount %}selected{% endif %}>{{ amount }} records</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <button type="submit">Sol·licitar</button>
+        </form>
+        <p class="hint">La cerca examina totes les columnes. El filtratge utilitza un valor exacte. L'ordenació pot emprar qualsevol columna del conjunt de dades.</p>
+    </section>
+
+    <section class="panel">
+        <div class="section-heading"><div><p class="eyebrow">CONCLUSIÓ CLAU</p><h2>Què podem aprendre?</h2></div></div>
+        <p class="intro">Aquestes observacions es calculen a partir del fitxer CSV. Quan cerqueu o filtreu, la informació s'actualitza per descriure els registres seleccionats.</p>
+        <div class="insights">
+            {% for insight in insights %}
+            <article class="insight-card">
+                <span>{{ insight.title }}</span>
+                <strong>{{ insight.value }}</strong>
+                <p>{{ insight.description }}</p>
+            </article>
+            {% endfor %}
+        </div>
+        <p class="hint">Important: el nombre de files representa registres en aquest conjunt de dades. No s'ha d'interpretar automàticament com el nombre d'accidents o de persones únics.</p>
+    </section>
+
+    <section class="panel">
+        <div class="section-heading"><div><p class="eyebrow">ANÀLISI VISUAL</p><h2>Distribució per categories</h2></div></div>
+        {% if chart_available %}
+            <img class="chart" src="{{ url_for('static', filename='img/grafica.png') }}" alt="Pie chart showing the distribution of a dataset category">
+        {% else %}
+            <p class="empty">No s'ha pogut crear un gràfic perquè la selecció actual no conté una categoria adequada amb diversos valors.</p>
+        {% endif %}
+    </section>
+
+    <section class="panel">
+        <div class="section-heading"><div><p class="eyebrow">TAULA DE DADES</p><h2>Registres d'accidents</h2></div><span class="result-count">{{ filtered_total }} files coincidents</span></div>
+        {% if rows %}
+        <div class="table-wrap">
+            <table>
+                <thead><tr>{% for column in table_columns %}<th>{{ column }}</th>{% endfor %}</tr></thead>
+                <tbody>
+                {% for row in rows %}
+                    <tr>{% for column in table_columns %}<td>{{ row[column] }}</td>{% endfor %}</tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p class="empty">No hi ha registres que coincideixin amb la vostra cerca o els filtres. Proveu d'eliminar alguns filtres.</p>
+        {% endif %}
+        <p class="hint">Aparèixer a {{ per_page }} files. El recompte total de coincidències que apareix a dalt inclou totes les files filtrades, no només les files visibles.</p>
+    </section>
+
+    <section class="panel source">
+        <p class="eyebrow">FONT DE DADES I METODOLOGIA</p>
+        <h2>De on proven les dades?</h2>
+        <p>Dataset: Accidents gestionats per la Guàrdia Urbana a la ciutat de Barcelona. Publicat per l'Ajuntament de Barcelona a través del seu Portal de Dades Obertes.</p>
+        <p><strong>Font:</strong> <a href="https://opendata-ajuntament.barcelona.cat/data/en/dataset/accidents-gu-bcn" target="_blank" rel="noopener noreferrer">Barcelona Open Data – Accidents (Guàrdia Urbana)</a></p>
+        <p class="hint">El dashboard analitza el fitxer CSV col·locat a <code>data/accidents.csv</code>. Comproveu l'any del dataset i el seu diccionari de dades abans d'interpretar columnes individuals. Els registres poden descriure informes d'accidents en lloc de persones o esdeveniments únics.</p>
+    </section>
+</main>
+<footer>Tauler d'accidents de trànsit a Barcelona · Projecte de dades educatiu</footer>
+</body>
+</html>
