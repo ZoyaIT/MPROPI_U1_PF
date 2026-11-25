@@ -1,10 +1,10 @@
 # Barcelona Traffic Accidents Dashboard
 
-A student project made with Flask, Jinja, Pandas and Matplotlib.
+A student project built using Flask, Jinja, Pandas, and Matplotlib.
 
 ## 1. Dataset
 
-Download a CSV file of accidents managed by the Guardia Urbana from the
+Download a CSV file of accidents handled by the Guàrdia Urbana from the
 Barcelona City Council Open Data Portal:
 
 https://opendata-ajuntament.barcelona.cat/data/es/dataset/accidents-gu-bcn
