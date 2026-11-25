@@ -1,6 +1,6 @@
 # Barcelona Traffic Accidents Dashboard
 
-A student project built using Flask, Jinja, Pandas, and Matplotlib.
+A  project built using Flask, Jinja, Pandas, and Matplotlib.
 
 ## 1. Dataset
 
